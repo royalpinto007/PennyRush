@@ -46,7 +46,7 @@
     "@next/eslint-plugin-next": "16.2.6",
     "@tailwindcss/postcss": "^4.3.0",
     "autoprefixer": "^10.4.20",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "globals": "^16.4.0",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
