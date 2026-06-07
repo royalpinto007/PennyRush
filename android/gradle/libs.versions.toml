@@ -17,7 +17,7 @@ biometric = "1.1.0"
 timber = "5.0.1"
 supabase = "3.0.3"
 ktor = "3.0.3"
-coil = "3.0.4"
+coil = "3.4.0"
 junit = "4.13.2"
 mlkitTextRecognition = "16.0.1"
 
