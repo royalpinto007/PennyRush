@@ -43,7 +43,7 @@
     "@types/papaparse": "^5.3.14",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.5.4",
     "eslint": "10.8.0",
     "globals": "^17.8.0",
     "postcss": "8.5.25",
