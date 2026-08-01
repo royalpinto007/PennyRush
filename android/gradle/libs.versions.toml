@@ -1,6 +1,6 @@
 [versions]
 agp = "8.13.0"
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 composeBom = "2026.05.01"
 activityCompose = "1.13.0"
 coreKtx = "1.18.0"
