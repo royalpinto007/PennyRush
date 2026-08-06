@@ -8,20 +8,21 @@ import { formatCurrency } from "@/lib/utils";
 export function SpendingDonut({
   spending,
   currency,
-  locale,
+  locale = "en-US",
 }: {
   spending: SpendingSlice[];
   currency?: string;
   locale?: string;
 }) {
   const total = spending.reduce((sum, item) => sum + item.value, 0);
+  const month = new Date().toLocaleString(locale, { month: "long" });
 
   return (
     <Card className="min-h-96">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm text-muted-foreground">Spending</p>
-          <h2 className="mt-2 text-xl font-bold">May categories</h2>
+          <h2 className="mt-2 text-xl font-bold">{month} categories</h2>
         </div>
         <p className="tabular rounded-chip bg-muted px-3 py-2 text-sm font-bold">{formatCurrency(total, currency, locale)}</p>
       </div>
