@@ -22,6 +22,20 @@ test("parses signed amount CSVs with quoted commas and escaped quotes", () => {
   assert.equal(result.candidates[0].type, "expense");
 });
 
+test("parses positive signed amounts as income when no type column exists", () => {
+  const csv = [
+    "Txn Date,Description,Amount",
+    "2026-05-12,SALARY MAY 2026,50000.00",
+  ].join("\n");
+
+  const result = parseCsvImport(csv);
+
+  assert.equal(result.errors.length, 0);
+  assert.equal(result.candidates.length, 1);
+  assert.equal(result.candidates[0].amount, 50000);
+  assert.equal(result.candidates[0].type, "income");
+});
+
 test("parses debit and credit split bank CSVs", () => {
   const csv = [
     "Date,Narration,Withdrawal Amount,Deposit Amount",

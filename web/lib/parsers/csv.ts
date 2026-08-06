@@ -270,7 +270,7 @@ function amountAndTypeFor(row: string[], mapping: Mapping) {
 
   const amount = parseMoney(row[mapping.amount]);
   if (amount === null || amount === 0) return null;
-  const typeText = mapping.type >= 0 ? row[mapping.type] : row[mapping.amount];
+  const typeText = mapping.type >= 0 ? row[mapping.type] : undefined;
   return {
     amount: Math.abs(amount),
     type: inferType(amount, typeText),
@@ -289,7 +289,7 @@ function inferType(amount: number, rawType: string | undefined): TransactionType
   if (amount < 0 || normalized.includes("debit") || normalized.includes("expense") || normalized.includes("withdraw")) {
     return "expense";
   }
-  return "expense";
+  return "income";
 }
 
 function parseMoney(raw: string | undefined): number | null {
@@ -361,7 +361,12 @@ function readableCell(value: string | undefined) {
 }
 
 function findHeader(headers: string[], candidates: string[]) {
-  return headers.findIndex((header) => candidates.some((candidate) => header === candidate || header.includes(candidate)));
+  return headers.findIndex((header) =>
+    candidates.some((candidate) => {
+      const escaped = candidate.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return new RegExp(`(^| )${escaped}( |$)`).test(header);
+    }),
+  );
 }
 
 function findExactHeader(headers: string[], candidates: string[]) {
