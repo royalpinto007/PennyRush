@@ -30,11 +30,23 @@ object MoneyFormatter {
 
     fun compact(amount: Double, currencyCode: String = "INR"): String {
         val abs = abs(amount)
-        val sym = when (currencyCode) { "INR" -> "₹"; "USD" -> "$"; else -> currencyCode }
+        val sign = if (amount < 0) "-" else ""
+        val sym = when (currencyCode) {
+            "INR" -> "₹"
+            "USD" -> "$"
+            else -> currencyCode
+        }
+
         return when {
-            abs >= 10_000_000 -> "$sym${"%.1f".format(abs / 10_000_000)}Cr"
-            abs >= 100_000 -> "$sym${"%.1f".format(abs / 100_000)}L"
-            abs >= 1_000 -> "$sym${"%.1f".format(abs / 1_000)}K"
+            abs >= 10_000_000 ->
+                "$sign$sym${String.format(Locale.ROOT, "%.1f", abs / 10_000_000)}Cr"
+
+            abs >= 100_000 ->
+                "$sign$sym${String.format(Locale.ROOT, "%.1f", abs / 100_000)}L"
+
+            abs >= 1_000 ->
+                "$sign$sym${String.format(Locale.ROOT, "%.1f", abs / 1_000)}K"
+
             else -> format(amount, currencyCode)
         }
     }

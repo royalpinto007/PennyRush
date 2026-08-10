@@ -28,4 +28,5 @@ kotlin {
 
 dependencies {
     implementation(libs.kotlinx.serialization.json)
+    testImplementation(libs.junit)
 }
