@@ -73,7 +73,7 @@ jobs:
 
       - name: Unit tests
         working-directory: android
-        run: ./gradlew :feature:home:testDebugUnitTest
+        run: ./gradlew :feature:home:testDebugUnitTest :core:common:testDebugUnitTest
         env:
           PENNYRUSH_SUPABASE_URL: ${{ secrets.PENNYRUSH_SUPABASE_URL }}
           PENNYRUSH_SUPABASE_ANON_KEY: ${{ secrets.PENNYRUSH_SUPABASE_ANON_KEY }}
