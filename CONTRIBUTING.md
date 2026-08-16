@@ -60,6 +60,8 @@ Pennyrush should feel clean, minimal, and premium. Prefer whitespace, clear typo
 
 The v1 stack should stay free to run at small scale. Avoid paid SDKs, ad SDKs, tracking SDKs, and dependencies that require hosted paid services for core functionality.
 
+CI blocks pull requests on high or critical vulnerabilities in production dependencies; the full dependency audit runs as a non-blocking informational check.
+
 ## Claiming an issue
 
 Want to pick something up? Just comment on the issue saying you'd like to work on
