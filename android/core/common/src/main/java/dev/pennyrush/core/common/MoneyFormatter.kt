@@ -15,11 +15,20 @@ object MoneyFormatter {
         locale: Locale = inLocale,
         showSign: Boolean = false,
     ): String {
-        val formatter = NumberFormat.getCurrencyInstance(locale).apply {
-            currency = Currency.getInstance(currencyCode)
-            maximumFractionDigits = 0
+        val currency = runCatching { Currency.getInstance(currencyCode) }.getOrNull()
+
+        val formatted = if (currency != null) {
+            NumberFormat.getCurrencyInstance(locale).apply {
+                this.currency = currency
+                maximumFractionDigits = 0
+            }.format(abs(amount))
+        } else {
+            val number = NumberFormat.getNumberInstance(locale).apply {
+                maximumFractionDigits = 0
+            }.format(abs(amount))
+            "$currencyCode$number"
         }
-        val formatted = formatter.format(abs(amount))
+
         return when {
             showSign && amount > 0 -> "+$formatted"
             showSign && amount < 0 -> "-$formatted"

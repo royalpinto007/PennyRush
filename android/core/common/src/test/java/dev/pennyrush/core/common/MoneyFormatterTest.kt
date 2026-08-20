@@ -1,6 +1,7 @@
 package dev.pennyrush.core.common
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MoneyFormatterTest {
@@ -46,4 +47,21 @@ class MoneyFormatterTest {
             java.util.Locale.setDefault(originalLocale)
         }
     }
+
+    @Test
+    fun `format uses raw invalid currency code`() {
+        val formatted = MoneyFormatter.format(500.0, "XYZ")
+
+        assertTrue(formatted.contains("XYZ"))
+        assertTrue(formatted.contains("500"))
+    }
+
+    @Test
+    fun `compact uses raw invalid currency code for small amounts`() {
+        val formatted = MoneyFormatter.compact(500.0, "XYZ")
+
+        assertTrue(formatted.contains("XYZ"))
+        assertTrue(formatted.contains("500"))
+    }
+
 }
