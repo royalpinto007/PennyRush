@@ -289,7 +289,7 @@ function inferType(amount: number, rawType: string | undefined): TransactionType
   if (amount < 0 || normalized.includes("debit") || normalized.includes("expense") || normalized.includes("withdraw")) {
     return "expense";
   }
-  return "expense";
+  return "income";
 }
 
 function parseMoney(raw: string | undefined): number | null {

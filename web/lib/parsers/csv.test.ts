@@ -10,16 +10,19 @@ test("parses signed amount CSVs with quoted commas and escaped quotes", () => {
   const csv = [
     "Txn Date,Description,Amount",
     "2026-05-12,\"POS STARBUCKS, BANDRA \"\"WEST\"\"\",-612.75",
+    "2026-05-13,Salary,50000.00",
   ].join("\n");
 
   const result = parseCsvImport(csv);
 
   assert.equal(result.errors.length, 0);
-  assert.equal(result.candidates.length, 1);
+  assert.equal(result.candidates.length, 2);
   assert.equal(result.candidates[0].date, "2026-05-12");
   assert.equal(result.candidates[0].merchant, 'POS STARBUCKS, BANDRA "WEST"');
   assert.equal(result.candidates[0].amount, 612.75);
   assert.equal(result.candidates[0].type, "expense");
+  assert.equal(result.candidates[1].amount, 50000);
+  assert.equal(result.candidates[1].type, "income");
 });
 
 test("parses debit and credit split bank CSVs", () => {
