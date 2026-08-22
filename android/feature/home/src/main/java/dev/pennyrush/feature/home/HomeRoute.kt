@@ -157,6 +157,7 @@ import dev.pennyrush.core.designsystem.ThemePreferences
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.Currency
 import kotlin.math.abs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -279,6 +280,11 @@ private fun PrCard(
     ) {
         Column(modifier = Modifier.padding(padding.dp), content = content)
     }
+}
+
+private fun isValidCurrencyCode(value: String): Boolean {
+    val normalized = value.trim().uppercase()
+    return normalized.length == 3 && runCatching { Currency.getInstance(normalized) }.isSuccess
 }
 
 @Composable
@@ -4065,7 +4071,7 @@ private fun AccountContent(
             onDismissRequest = { currencyDialog = false },
             confirmButton = {
                 Button(
-                    enabled = currencyDraft.trim().length == 3,
+                    enabled = isValidCurrencyCode(currencyDraft),
                     onClick = {
                         AppPreferences.updateCurrencyCode(currencyDraft)
                         currencyDialog = false
