@@ -68,19 +68,29 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6.3.0
 
-      - name: Compile Kotlin
+      - name: Assemble Android modules
         working-directory: android
-        run: ./gradlew :app:compileDebugKotlin
+        run: ./gradlew assembleDebug
         env:
           PENNYRUSH_SUPABASE_URL: ${{ secrets.PENNYRUSH_SUPABASE_URL }}
           PENNYRUSH_SUPABASE_ANON_KEY: ${{ secrets.PENNYRUSH_SUPABASE_ANON_KEY }}
 
       - name: Unit tests
         working-directory: android
-        run: ./gradlew :feature:home:testDebugUnitTest :core:common:testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
         env:
           PENNYRUSH_SUPABASE_URL: ${{ secrets.PENNYRUSH_SUPABASE_URL }}
           PENNYRUSH_SUPABASE_ANON_KEY: ${{ secrets.PENNYRUSH_SUPABASE_ANON_KEY }}
+
+      - name: Upload unit test reports
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: android-unit-test-reports
+          path: |
+            android/**/build/reports/tests/
+            android/**/build/test-results/
+          if-no-files-found: ignore
 
       - name: Android release lint
         working-directory: android
@@ -89,9 +99,4 @@ jobs:
           PENNYRUSH_SUPABASE_URL: ${{ secrets.PENNYRUSH_SUPABASE_URL }}
           PENNYRUSH_SUPABASE_ANON_KEY: ${{ secrets.PENNYRUSH_SUPABASE_ANON_KEY }}
 
-      - name: Assemble debug APK
-        working-directory: android
-        run: ./gradlew :app:assembleDebug
-        env:
-          PENNYRUSH_SUPABASE_URL: ${{ secrets.PENNYRUSH_SUPABASE_URL }}
-          PENNYRUSH_SUPABASE_ANON_KEY: ${{ secrets.PENNYRUSH_SUPABASE_ANON_KEY }}
+      
