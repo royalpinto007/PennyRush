@@ -331,7 +331,8 @@ function normalizeDate(raw: string | undefined) {
 
   const parsed = new Date(value);
   if (Number.isNaN(parsed.valueOf())) return null;
-  return parsed.toISOString().slice(0, 10);
+  // Use local calendar parts then UTC-normalize so east-of-UTC zones do not shift the day.
+  return datePartsToIso(parsed.getFullYear(), parsed.getMonth() + 1, parsed.getDate());
 }
 
 function datePartsToIso(year: number, month: number, day: number) {

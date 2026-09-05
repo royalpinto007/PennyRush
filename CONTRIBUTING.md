@@ -23,6 +23,21 @@ npm run web:build
 
 Android currently uses the scaffold in `android/`. Run Android checks from Android Studio or a local Gradle install once the Gradle wrapper is added.
 
+### Android tests
+
+Place Android unit tests in the module that owns the code being tested. For
+example, tests for `:core:common` should live under that module's `src/test`
+directory rather than in `:app` or another feature module.
+
+Run all Android unit tests from the `android/` directory with:
+
+```bash
+./gradlew testDebugUnitTest
+```
+
+CI runs unit tests across all applicable Android modules and assembles the debug
+variants so that every module is compiled.
+
 ## Privacy Rules
 
 - Do not persist uploaded bank statements, receipt images, PDFs, or CSV files.
@@ -81,3 +96,4 @@ Link your pull request to the issue in the PR description (for example
 closed without being merged the claim is released so someone else can pick it up.
 
 No pressure on timelines otherwise. Ask questions in the issue thread any time.
+
