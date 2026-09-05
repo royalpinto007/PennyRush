@@ -62,9 +62,9 @@ const checks = [
       "npm run web:lint",
       "npm run web:typecheck",
       "npm run web:build",
-      ":feature:home:testDebugUnitTest",
+      "testDebugUnitTest",
       ":app:lintRelease",
-      ":app:assembleDebug",
+      "assembleDebug",
     ],
   },
   {
