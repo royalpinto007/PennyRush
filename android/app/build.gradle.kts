@@ -31,7 +31,7 @@ plugins {
 
 android {
     namespace = "dev.pennyrush.app"
-    compileSdk = 37
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "dev.pennyrush.app"
