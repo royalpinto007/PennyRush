@@ -16,8 +16,8 @@
     "web"
   ],
   "overrides": {
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "miniflare": {
       "undici": "7.29.0"
     },
@@ -25,8 +25,8 @@
     "sharp": "$sharp"
   },
   "devDependencies": {
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "sharp": "0.35.4"
   },
   "scripts": {
