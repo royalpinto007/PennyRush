@@ -16,6 +16,7 @@
     "web"
   ],
   "overrides": {
+    "@supabase/supabase-js": "2.118.0",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "miniflare": {
