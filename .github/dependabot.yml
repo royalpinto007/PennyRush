@@ -33,6 +33,17 @@ updates:
         update-types: ["version-update:semver-minor"]
       - dependency-name: "gradle-wrapper"
         update-types: ["version-update:semver-major"]
+      # These lines require API 37 / AGP 9; keep API 36 until the toolchain migration.
+      - dependency-name: "androidx.compose:compose-bom"
+        versions: [">=2026.09.00"]
+      - dependency-name: "androidx.navigation:navigation-compose"
+        versions: [">=2.10.0"]
+      - dependency-name: "io.coil-kt.coil3:*"
+        versions: [">=3.6.0"]
+      - dependency-name: "io.ktor:*"
+        versions: [">=3.6.0"]
+      - dependency-name: "io.github.jan-tennert.supabase:bom"
+        versions: [">=3.9.0"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
